@@ -3,8 +3,9 @@ import sys,getopt
 import random
 
 
+random.seed(10)
+
 def sampling(train):
-	random.seed(10)
 
 	positive = train.copy()
 	negative = train.copy()

@@ -2,9 +2,11 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
+from sklearn.metrics import roc_curve, roc_auc_score
 
 import data_splitting
 import data_sampling
+import submission_file
 
 #DATA READING
 
@@ -14,6 +16,9 @@ client = pd.read_csv('../data/client.csv',delimiter=";")
 disp = pd.read_csv('../data/disp.csv',delimiter=";")
 district = pd.read_csv('../data/district.csv',delimiter=";")
 loan_train = pd.read_csv('../data/loan_train.csv',delimiter=";")
+
+competition = pd.read_csv('../data/loan_test.csv',delimiter=";")
+
 #trans_train = pd.read_csv('../data/trans_train.csv',delimiter=";")
 
 #DATA JOINING
@@ -31,9 +36,7 @@ test = split_data[1]
 
 #DATA SAMPLING
 
-#[positive,negative]
 train = data_sampling.sampling(train)
-
 
 #MODEL BUILDING
 
@@ -60,7 +63,18 @@ decision_tree_classifier.fit(training_inputs, training_labels)
 
 # Validate the classifier on the testing set using classification accuracy
 score = decision_tree_classifier.score(testing_inputs, testing_labels)
+print("Not sure what score: {}".format(score))
 
-print(score)
+predicted = decision_tree_classifier.predict(testing_inputs)
+print("AUC score: {}".format(roc_auc_score(testing_labels, predicted)))
 
 #MODEL APPLYING AND OBTAINING PREDICTION
+
+submission_file.create(competition,decision_tree_classifier)
+
+
+
+
+
+
+
