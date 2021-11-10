@@ -32,9 +32,8 @@ test = split_data[1]
 #DATA SAMPLING
 
 #[positive,negative]
-sampled_data = data_sampling.sampling(split_data[0])
+train = data_sampling.sampling(train)
 
-print([len(sampled_data[0]),len(sampled_data[1])])
 
 #MODEL BUILDING
 
