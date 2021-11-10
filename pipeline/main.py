@@ -25,11 +25,26 @@ loan_train = pd.read_csv('../data/loan_train.csv',delimiter=";")
 
 split_data = data_splitting.split(loan_train)
 
+train = split_data[0]
+test = split_data[1]
 
 #DATA SAMPLING
 
 
 #MODEL BUILDING
+
+# Preparing data for classifier
+training_inputs = train[['date', 'amount',
+                         'duration', 'payments']].values
+
+training_labels = train['status'].values
+
+
+testing_inputs = test[['date', 'amount',
+                         'duration', 'payments']].values
+
+testing_labels = test['status'].values
+
 
 from sklearn.tree import DecisionTreeClassifier
 
@@ -37,10 +52,10 @@ from sklearn.tree import DecisionTreeClassifier
 decision_tree_classifier = DecisionTreeClassifier()
 
 # Train the classifier on the training set
-decision_tree_classifier.fit(split_data[0], split_data[1])
+decision_tree_classifier.fit(training_inputs, training_labels)
 
 # Validate the classifier on the testing set using classification accuracy
-score = decision_tree_classifier.score(split_data[2], split_data[3])
+score = decision_tree_classifier.score(testing_inputs, testing_labels)
 
 print(score)
 
