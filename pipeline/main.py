@@ -4,6 +4,7 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 
 import data_splitting
+import data_sampling
 
 #DATA READING
 
@@ -28,6 +29,10 @@ split_data = data_splitting.split(loan_train)
 
 #DATA SAMPLING
 
+#[positive,negative]
+sampled_data = data_sampling.sampling(split_data[0])
+
+print([len(sampled_data[0]),len(sampled_data[1])])
 
 #MODEL BUILDING
 
