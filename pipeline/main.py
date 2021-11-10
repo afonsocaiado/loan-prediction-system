@@ -39,9 +39,9 @@ decision_tree_classifier = DecisionTreeClassifier()
 # Train the classifier on the training set
 decision_tree_classifier.fit(split_data[0], split_data[1])
 
-#MODEL APPLYING AND OBTAINING ESTIMATE
-
 # Validate the classifier on the testing set using classification accuracy
 score = decision_tree_classifier.score(split_data[2], split_data[3])
 
 print(score)
+
+#MODEL APPLYING AND OBTAINING PREDICTION
