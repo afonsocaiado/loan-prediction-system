@@ -1,20 +1,27 @@
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
-import sys,getopt
 
 
-def main(argv):
-	opts, args = getopt.getopt(argv,"hi:o:",["ifile=","ofile="])
-
-	dev = pd.read_csv(args[0],delimiter=";")
+def split(data):
 	
-	train = dev.copy()
-	test = dev.copy()
+    train = data.copy()
+    test = data.copy()
+    
+    train = train.loc[(train['date'] < 960400)]
+    
+    test = test.loc[test['date'] >= 960400]
+    
+    # Preparing data for classifier
+    training_inputs = train[['date', 'amount',
+                             'duration', 'payments']].values
 
-	test = test.loc[test['date'] < 941000]
+    training_labels = train['status'].values
+
+
+    testing_inputs = test[['date', 'amount',
+                             'duration', 'payments']].values
+
+    testing_labels = test['status'].values
 	
-	train = train.loc[(train['date'] >= 941000)]
-	
-if __name__ == "__main__":
-   main(sys.argv[1:])
+    return [training_inputs, training_labels, testing_inputs, testing_labels]
