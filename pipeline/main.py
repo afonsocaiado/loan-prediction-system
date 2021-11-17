@@ -4,6 +4,13 @@ import seaborn as sns
 import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score
 
+from sklearn.naive_bayes import GaussianNB
+from sklearn.svm import SVC
+from sklearn.linear_model import LogisticRegression
+from sklearn.linear_model import Perceptron
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
+
 import data_splitting
 import data_sampling
 import submission_file
@@ -52,25 +59,35 @@ testing_inputs = test[['date', 'amount',
 
 testing_labels = test['status'].values
 
-
-from sklearn.tree import DecisionTreeClassifier
-
-# Create the classifier
-decision_tree_classifier = DecisionTreeClassifier()
-
-# Train the classifier on the training set
-decision_tree_classifier.fit(training_inputs, training_labels)
-
-# Validate the classifier on the testing set using classification accuracy
-score = decision_tree_classifier.score(testing_inputs, testing_labels)
-print("Not sure what score: {}".format(score))
-
-predicted = decision_tree_classifier.predict(testing_inputs)
-print("AUC score: {}".format(roc_auc_score(testing_labels, predicted)))
-
 #MODEL APPLYING AND OBTAINING PREDICTION
 
-submission_file.create(competition,decision_tree_classifier)
+#Decision Tree
+
+# Create the classifier
+#classifier = DecisionTreeClassifier()
+#classifier = RandomForestClassifier()
+#classifier = GaussianNB()
+classifier = LogisticRegression()
+#classifier = SVC()
+#classifier = Perceptron()
+
+# Train the classifier on the training set
+classifier.fit(training_inputs, training_labels)
+
+# Validate the classifier on the testing set using classification accuracy
+score = classifier.score(testing_inputs, testing_labels)
+
+# Obtain predictions
+predicted = classifier.predict(testing_inputs)
+
+
+print("Accuracy score: {}".format(score))
+
+print("AUC score: {}".format(roc_auc_score(testing_labels, predicted)))
+
+#OBTAINING SUBMISSION
+
+submission_file.create(competition,classifier)
 
 
 

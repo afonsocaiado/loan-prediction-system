@@ -1,11 +1,11 @@
 import collections
 
-def create(competition,decision_tree_classifier):
+def create(competition,classifier):
 	competition_inputs = competition[['date', 'amount',
                          'duration', 'payments']].values
 
 
-	competition_prob = decision_tree_classifier.predict_proba(competition_inputs)
+	competition_prob = classifier.predict_proba(competition_inputs)
 
 	d = {}
 	for v in competition.index:

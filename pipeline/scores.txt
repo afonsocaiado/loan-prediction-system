@@ -1,0 +1,6 @@
+Scores
+
+17/11/21
+Logistic Regression
+Loan
+AUC: 53.5
