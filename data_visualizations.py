@@ -17,9 +17,9 @@ loan_train = pd.read_csv('data\loan_train.csv',delimiter=";")
 dev = loan_train.copy()
 dev_lenght = len(dev)
 #split up dev data into training and test data and create copies to keep original data
-#data_split = round((2/3)*dev_lenght)
-#train = (dev.iloc[:data_split,:]).copy()
-#test = (dev.iloc[data_split+1:,:]).copy()
+data_split = round((2/3)*dev_lenght)
+train = (dev.iloc[:data_split,:]).copy()
+test = (dev.iloc[data_split+1:,:]).copy()
 
 print("Lets see the columns to decide which could have colleration:\n", dev.head(),"\n")
 
