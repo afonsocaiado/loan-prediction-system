@@ -9,7 +9,7 @@ def create(competition,classifier):
 
 	d = {}
 	for v in competition.index:
-		d[competition["loan_id"][v]] = competition_prob[v][0]
+		d[competition["loan_id"][v]] = competition_prob[v][1]
 	
 	d = collections.OrderedDict(sorted(d.items()))
 
