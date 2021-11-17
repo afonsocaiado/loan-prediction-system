@@ -67,8 +67,8 @@ testing_labels = test['status'].values
 #classifier = DecisionTreeClassifier()
 #classifier = RandomForestClassifier()
 #classifier = GaussianNB()
-classifier = LogisticRegression()
-#classifier = SVC()
+#classifier = LogisticRegression()
+classifier = SVC(probability=True)
 #classifier = Perceptron()
 
 # Train the classifier on the training set

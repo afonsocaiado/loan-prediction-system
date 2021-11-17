@@ -10,7 +10,7 @@ def prep_data():
     district = pd.read_csv('../data\district.csv',na_values = ['NA'],delimiter=";")
     loan_train = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
     trans_train = pd.read_csv('../data/trans_train.csv', dtype={'bank' : 'str'}, na_values = ['NA'],delimiter=";")
-
+    
     #join together loan_train and account and rename the columns with the same name
     account.rename(columns={'date': 'account_date'}, inplace=True)
     loan_train.rename(columns={'date': 'loan_date'}, inplace=True)
@@ -29,11 +29,6 @@ def prep_data():
     loan_account_district.region = [reg[i] for i in loan_account_district.region]
     
     return loan_account_district
-
-
-
-print(prep_data().columns)
-
 
 #join disp and card_train
 #card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
