@@ -3,13 +3,13 @@ import matplotlib.pyplot as plt
 
 def prep_data():
     #read datasets
-    account = pd.read_csv('data/account.csv',na_values = ['NA'],delimiter=";")
-    card_train = pd.read_csv('data\card_train.csv',na_values = ['NA'],delimiter=";")
-    client = pd.read_csv('data\client.csv',na_values = ['NA'],delimiter=";")
-    disp = pd.read_csv('data\disp.csv',na_values = ['NA'],delimiter=";")
-    district = pd.read_csv('data\district.csv',na_values = ['NA'],delimiter=";")
-    loan_train = pd.read_csv('data\loan_train.csv',na_values = ['NA'],delimiter=";")
-    trans_train = pd.read_csv('data/trans_train.csv', dtype={'bank' : 'str'}, na_values = ['NA'],delimiter=";")
+    account = pd.read_csv('../data/account.csv',na_values = ['NA'],delimiter=";")
+    card_train = pd.read_csv('../data\card_train.csv',na_values = ['NA'],delimiter=";")
+    client = pd.read_csv('../data\client.csv',na_values = ['NA'],delimiter=";")
+    disp = pd.read_csv('../data\disp.csv',na_values = ['NA'],delimiter=";")
+    district = pd.read_csv('../data\district.csv',na_values = ['NA'],delimiter=";")
+    loan_train = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
+    trans_train = pd.read_csv('../data/trans_train.csv', dtype={'bank' : 'str'}, na_values = ['NA'],delimiter=";")
     
     #join together loan_train and account and rename the columns with the same name
     account.rename(columns={'date': 'account_date'}, inplace=True)
@@ -22,7 +22,6 @@ def prep_data():
     loan_account_district = pd.merge(loan_account, district, left_on="district_id", right_on="code ")
     
     return loan_account_district
-
 
 #join disp and card_train
 #card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
