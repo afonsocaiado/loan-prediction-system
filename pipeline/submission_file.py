@@ -1,8 +1,12 @@
 import collections
 
 def create(competition,classifier):
-	competition_inputs = competition[['date', 'amount',
-                         'duration', 'payments']].values
+	competition_inputs = competition[['loan_date', 'amount', 'duration', 'payments',
+       'frequency', 'account_date', 'region', 'inhabitants',
+       'inhabitants < 499', 'inhabitants 500-1999', 'inhabitants 2000-9999',
+       'inhabitants >10000', 'no. of cities ', 'ratio of urban inhabitants ',
+       'average salary ', 'unemploymant 96',
+       'enterpreneurs', 'crimes 96']].values
 
 
 	competition_prob = classifier.predict_proba(competition_inputs)
