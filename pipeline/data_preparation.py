@@ -1,20 +1,25 @@
 import pandas as pd
 import matplotlib.pyplot as plt
 
-def prep_data():
+def prep_data(arg):
+    if arg == 'train':
+        loan = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
+    elif arg == 'competition':
+        loan = pd.read_csv('../data/loan_test.csv', na_values = ['NA'], delimiter=";")
+    else:
+        print("ERROR: invalid argument")
     #read datasets
     account = pd.read_csv('../data/account.csv',na_values = ['NA'],delimiter=";")
     card_train = pd.read_csv('../data\card_train.csv',na_values = ['NA'],delimiter=";")
     client = pd.read_csv('../data\client.csv',na_values = ['NA'],delimiter=";")
     disp = pd.read_csv('../data\disp.csv',na_values = ['NA'],delimiter=";")
     district = pd.read_csv('../data\district.csv',na_values = ['NA'],delimiter=";")
-    loan_train = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
     trans_train = pd.read_csv('../data/trans_train.csv', dtype={'bank' : 'str'}, na_values = ['NA'],delimiter=";")
     
     #join together loan_train and account and rename the columns with the same name
     account.rename(columns={'date': 'account_date'}, inplace=True)
-    loan_train.rename(columns={'date': 'loan_date'}, inplace=True)
-    loan_account = pd.merge(loan_train, account, on="account_id")
+    loan.rename(columns={'date': 'loan_date'}, inplace=True)
+    loan_account = pd.merge(loan, account, on="account_id")
 
     #rename columns
     district.rename(columns={'no. of inhabitants': 'inhabitants','no. of municipalities with inhabitants < 499 ':'inhabitants < 499' ,'no. of municipalities with inhabitants 500-1999':'inhabitants 500-1999', 'no. of municipalities with inhabitants 2000-9999 ':'inhabitants 2000-9999','no. of municipalities with inhabitants >10000 ': 'inhabitants >10000', "unemploymant rate '95 ":'unemploymant 95', "unemploymant rate '96 ":'unemploymant 96', 'no. of enterpreneurs per 1000 inhabitants ':'enterpreneurs',"no. of commited crimes '95 ":'crimes 95', "no. of commited crimes '96 ":'crimes 96'}, inplace=True)
@@ -35,7 +40,8 @@ def prep_data():
     
     return loan_account_district
 
-print(prep_data().columns)
+
+print(prep_data('train').columns)
 #join disp and card_train
 #card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
 #ard_train.rename(columns={'type': 'card_type'}, inplace=True)
