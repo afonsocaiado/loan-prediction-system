@@ -18,20 +18,11 @@ import data_preparation
 
 #DATA READING
 
-account = pd.read_csv('../data/account.csv',delimiter=";")
-card_train = pd.read_csv('../data/card_train.csv',delimiter=";")
-client = pd.read_csv('../data/client.csv',delimiter=";")
-disp = pd.read_csv('../data/disp.csv',delimiter=";")
-district = pd.read_csv('../data/district.csv',delimiter=";")
-loan_train = pd.read_csv('../data/loan_train.csv',delimiter=";")
-
-competition = pd.read_csv('../data/loan_test.csv',delimiter=";")
-
-#trans_train = pd.read_csv('../data/trans_train.csv',delimiter=";")
 
 #DATA JOINING
 
-joined_data = data_preparation.prep_data()
+joined_data = data_preparation.prep_data('train')
+joined_data_competition = data_preparation.prep_data('competition')
 
 #DATA CLEANING
 
@@ -74,11 +65,11 @@ testing_labels = test['status'].values
 #Decision Tree
 
 # Create the classifier
-classifier = DecisionTreeClassifier()
-classifier = RandomForestClassifier()
-classifier = GaussianNB()
+#classifier = DecisionTreeClassifier()
+#classifier = RandomForestClassifier()
+#classifier = GaussianNB()
 classifier = LogisticRegression()
-classifier = SVC(probability=True)
+#classifier = SVC(probability=True)
 #classifier = Perceptron()
 
 # Train the classifier on the training set
@@ -89,15 +80,18 @@ score = classifier.score(testing_inputs, testing_labels)
 
 # Obtain predictions
 predicted = classifier.predict(testing_inputs)
+prediction_proba = classifier.predict_proba(testing_inputs)
 
+print(predicted)
+print(testing_labels)
 
 print("Accuracy score: {}".format(score))
 
-print("AUC score: {}".format(roc_auc_score(testing_labels, predicted)))
+print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
 
 #OBTAINING SUBMISSION
 
-submission_file.create(competition,classifier)
+submission_file.create(joined_data_competition,classifier)
 
 
 

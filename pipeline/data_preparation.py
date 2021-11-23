@@ -2,6 +2,20 @@ import pandas as pd
 import matplotlib.pyplot as plt
 
 def prep_data(arg):
+    """
+    
+
+    Parameters
+    ----------
+    arg : String
+        Use train for data prep of training data, use competition for data prep of competition data.
+
+    Returns
+    -------
+    loan_account_district : Dataframe
+        returns joined data.
+
+    """
     if arg == 'train':
         loan = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
     elif arg == 'competition':
@@ -31,7 +45,7 @@ def prep_data(arg):
     #join loan_account with district
     loan_account_district = pd.merge(loan_account, district, left_on="district_id", right_on="code ")
     #remove unuseful columns
-    loan_account_district.drop(['loan_id', 'district_id', 'code ', 'name '], axis=1, inplace=True)
+    loan_account_district.drop(['district_id', 'code ', 'name '], axis=1, inplace=True)
     #replace string values with numerical values for analysis
     freq = {'monthly issuance': 1, "weekly issuance": 2, "issuance after transaction": 3}
     loan_account_district.frequency = [freq[i] for i in loan_account_district.frequency]
@@ -41,7 +55,7 @@ def prep_data(arg):
     return loan_account_district
 
 
-print(prep_data('train').columns)
+#print(prep_data('train').columns)
 #join disp and card_train
 #card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
 #ard_train.rename(columns={'type': 'card_type'}, inplace=True)
