@@ -4,3 +4,10 @@ Scores
 Logistic Regression
 Loan
 AUC: 53.5
+
+---
+
+17/11/21
+SVM
+Loan
+AUC: 57.7

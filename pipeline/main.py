@@ -14,6 +14,7 @@ from sklearn.ensemble import RandomForestClassifier
 import data_splitting
 import data_sampling
 import submission_file
+import data_preparation
 
 #DATA READING
 
@@ -30,13 +31,14 @@ competition = pd.read_csv('../data/loan_test.csv',delimiter=";")
 
 #DATA JOINING
 
+joined_data = data_preparation.prep_data()
 
 #DATA CLEANING
 
 
 #DATA SPLITTING
 
-split_data = data_splitting.split(loan_train)
+split_data = data_splitting.split(joined_data)
 
 train = split_data[0]
 test = split_data[1]
@@ -48,14 +50,22 @@ train = data_sampling.sampling(train)
 #MODEL BUILDING
 
 # Preparing data for classifier
-training_inputs = train[['date', 'amount',
-                         'duration', 'payments']].values
+training_inputs = train[['loan_date', 'amount', 'duration', 'payments',
+       'frequency', 'account_date', 'region', 'inhabitants',
+       'inhabitants < 499', 'inhabitants 500-1999', 'inhabitants 2000-9999',
+       'inhabitants >10000', 'no. of cities ', 'ratio of urban inhabitants ',
+       'average salary ', 'unemploymant 96',
+       'enterpreneurs', 'crimes 96']].values
 
 training_labels = train['status'].values
 
 
-testing_inputs = test[['date', 'amount',
-                         'duration', 'payments']].values
+testing_inputs = test[['loan_date', 'amount', 'duration', 'payments',
+       'frequency', 'account_date', 'region', 'inhabitants',
+       'inhabitants < 499', 'inhabitants 500-1999', 'inhabitants 2000-9999',
+       'inhabitants >10000', 'no. of cities ', 'ratio of urban inhabitants ',
+       'average salary ', 'unemploymant 96',
+       'enterpreneurs', 'crimes 96']].values
 
 testing_labels = test['status'].values
 
@@ -64,10 +74,10 @@ testing_labels = test['status'].values
 #Decision Tree
 
 # Create the classifier
-#classifier = DecisionTreeClassifier()
-#classifier = RandomForestClassifier()
-#classifier = GaussianNB()
-#classifier = LogisticRegression()
+classifier = DecisionTreeClassifier()
+classifier = RandomForestClassifier()
+classifier = GaussianNB()
+classifier = LogisticRegression()
 classifier = SVC(probability=True)
 #classifier = Perceptron()
 
