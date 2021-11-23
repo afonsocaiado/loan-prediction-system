@@ -8,12 +8,13 @@ def create(competition,classifier):
        'average salary ', 'unemploymant 96',
        'enterpreneurs', 'crimes 96']].values
 
-
+    #predict_proba() returns 2Darray of probabilities of classes. We have classes -1: unvalid and 1:valid. We want the class with the unvalid loans
+    #using classifier.classes_ we can see the order off classes that predict_proba() returns. We can see that the -1 class is the first element
 	competition_prob = classifier.predict_proba(competition_inputs)
 
 	d = {}
 	for v in competition.index:
-		d[competition["loan_id"][v]] = competition_prob[v][1]
+		d[competition["loan_id"][v]] = round(competition_prob[v][0],1)
 	
 	d = collections.OrderedDict(sorted(d.items()))
 
