@@ -18,6 +18,11 @@ def prep_data():
 
     #rename columns
     district.rename(columns={'no. of inhabitants': 'inhabitants','no. of municipalities with inhabitants < 499 ':'inhabitants < 499' ,'no. of municipalities with inhabitants 500-1999':'inhabitants 500-1999', 'no. of municipalities with inhabitants 2000-9999 ':'inhabitants 2000-9999','no. of municipalities with inhabitants >10000 ': 'inhabitants >10000', "unemploymant rate '95 ":'unemploymant 95', "unemploymant rate '96 ":'unemploymant 96', 'no. of enterpreneurs per 1000 inhabitants ':'enterpreneurs',"no. of commited crimes '95 ":'crimes 95', "no. of commited crimes '96 ":'crimes 96'}, inplace=True)
+    #replace question marks by mean value of column
+    replace_dict = {'unemploymant 95': {'?': pd.to_numeric(district['unemploymant 95'], errors="coerce").mean()},
+                    'crimes 95': {'?': pd.to_numeric(district['crimes 95'], errors="coerce").mean()}}
+    district.replace(replace_dict, inplace = True)
+    
     #join loan_account with district
     loan_account_district = pd.merge(loan_account, district, left_on="district_id", right_on="code ")
     #remove unuseful columns
@@ -30,6 +35,7 @@ def prep_data():
     
     return loan_account_district
 
+print(prep_data().columns)
 #join disp and card_train
 #card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
 #ard_train.rename(columns={'type': 'card_type'}, inplace=True)
