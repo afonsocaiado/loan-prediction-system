@@ -10,8 +10,8 @@ def sampling(train):
 	positive = train.copy()
 	negative = train.copy()
 	
-	positive = negative.loc[negative["status"] == 1]
-	negative = negative.loc[negative["status"] == -1]
+	positive = negative.loc[negative["status"] == -1]
+	negative = negative.loc[negative["status"] == 1]
 	
 	
 	while(len(positive) != len(negative)):

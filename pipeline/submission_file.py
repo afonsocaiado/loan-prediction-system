@@ -14,7 +14,7 @@ def create(competition,classifier):
 
 	d = {}
 	for v in competition.index:
-		d[competition["loan_id"][v]] = round(competition_prob[v][0],1)
+		d[competition["loan_id"][v]] = round(competition_prob[v][1],1)
 	
 	d = collections.OrderedDict(sorted(d.items()))
 

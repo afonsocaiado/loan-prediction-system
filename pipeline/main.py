@@ -26,6 +26,9 @@ joined_data_competition = data_preparation.prep_data('competition')
 
 #DATA CLEANING
 
+joined_data["status"].replace({-1: 1, 1: -1}, inplace=True)
+
+joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
 
 #DATA SPLITTING
 
@@ -68,7 +71,7 @@ testing_labels = test['status'].values
 #classifier = DecisionTreeClassifier()
 #classifier = RandomForestClassifier()
 #classifier = GaussianNB()
-classifier = LogisticRegression()
+classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
 #classifier = SVC(probability=True)
 #classifier = Perceptron()
 
@@ -84,6 +87,8 @@ prediction_proba = classifier.predict_proba(testing_inputs)
 
 print(predicted)
 print(testing_labels)
+
+print(prediction_proba)
 
 print("Accuracy score: {}".format(score))
 
