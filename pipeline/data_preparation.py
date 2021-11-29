@@ -1,4 +1,5 @@
 import pandas as pd
+import numpy as np
 import matplotlib.pyplot as plt
 
 def prep_data(arg):
@@ -17,17 +18,17 @@ def prep_data(arg):
 
     """
     if arg == 'train':
-        loan = pd.read_csv('../data\loan_train.csv',na_values = ['NA'],delimiter=";")
+        loan = pd.read_csv('../data/loan_train.csv',na_values = ['NA'],delimiter=";")
     elif arg == 'competition':
         loan = pd.read_csv('../data/loan_test.csv', na_values = ['NA'], delimiter=";")
     else:
         print("ERROR: invalid argument")
     #read datasets
     account = pd.read_csv('../data/account.csv',na_values = ['NA'],delimiter=";")
-    card_train = pd.read_csv('../data\card_train.csv',na_values = ['NA'],delimiter=";")
-    client = pd.read_csv('../data\client.csv',na_values = ['NA'],delimiter=";")
-    disp = pd.read_csv('../data\disp.csv',na_values = ['NA'],delimiter=";")
-    district = pd.read_csv('../data\district.csv',na_values = ['NA'],delimiter=";")
+    card_train = pd.read_csv('../data/card_train.csv',na_values = ['NA'],delimiter=";")
+    client = pd.read_csv('../data/client.csv',na_values = ['NA'],delimiter=";")
+    disp = pd.read_csv('../data/disp.csv',na_values = ['NA'],delimiter=";")
+    district = pd.read_csv('../data/district.csv',na_values = ['NA'],delimiter=";")
     trans_train = pd.read_csv('../data/trans_train.csv', dtype={'bank' : 'str'}, na_values = ['NA'],delimiter=";")
     
     #join together loan_train and account and rename the columns with the same name
@@ -51,7 +52,15 @@ def prep_data(arg):
     loan_account_district.frequency = [freq[i] for i in loan_account_district.frequency]
     reg ={"south Moravia": 1, "north Moravia": 2, "Prague": 3, "central Bohemia": 4, "east Bohemia": 5,"west Bohemia": 6, "south Bohemia": 7, "north Bohemia": 8}
     loan_account_district.region = [reg[i] for i in loan_account_district.region]
-    
+
+    #prepare trans_train
+    trans_train.drop(['type', 'operation', 'k_symbol', 'bank', 'account', 'amount', 'trans_id'], axis=1, inplace=True)
+    trans_train = trans_train.groupby('account_id')['balance'].agg([np.min, np.max, np.mean])
+    trans_train = trans_train.rename(columns={'amin' : 'min_balance', 'amax' : 'max_balance', 'mean' : 'avg_balance'})
+    #join trans and loan_account_district
+    loan_account_district_trans = pd.merge(loan_account_district, trans_train, on="account_id")
+    loan_account_district_trans['effort'] = loan_account_district_trans['amount'] / loan_account_district_trans['avg_balance']
+    print(loan_account_district_trans.head())
     return loan_account_district
 
 

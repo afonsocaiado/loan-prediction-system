@@ -85,14 +85,14 @@ score = classifier.score(testing_inputs, testing_labels)
 predicted = classifier.predict(testing_inputs)
 prediction_proba = classifier.predict_proba(testing_inputs)
 
-print(predicted)
-print(testing_labels)
+#(predicted)
+#print(testing_labels)
 
-print(prediction_proba)
+#print(prediction_proba)
 
-print("Accuracy score: {}".format(score))
+#print("Accuracy score: {}".format(score))
 
-print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
+#print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
 
 #OBTAINING SUBMISSION
 
