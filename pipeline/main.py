@@ -22,13 +22,13 @@ import data_preparation
 #DATA JOINING
 
 joined_data = data_preparation.prep_data('train')
-joined_data_competition = data_preparation.prep_data('competition')
+#joined_data_competition = data_preparation.prep_data('competition')
 
 #DATA CLEANING
 
 joined_data["status"].replace({-1: 1, 1: -1}, inplace=True)
 
-joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
+#joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
 
 #DATA SPLITTING
 
@@ -85,18 +85,18 @@ score = classifier.score(testing_inputs, testing_labels)
 predicted = classifier.predict(testing_inputs)
 prediction_proba = classifier.predict_proba(testing_inputs)
 
-print(predicted)
-print(testing_labels)
+#(predicted)
+#print(testing_labels)
 
-print(prediction_proba)
+#print(prediction_proba)
 
-print("Accuracy score: {}".format(score))
+#print("Accuracy score: {}".format(score))
 
-print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
+#print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
 
 #OBTAINING SUBMISSION
 
-submission_file.create(joined_data_competition,classifier)
+#submission_file.create(joined_data_competition,classifier)
 
 
 
