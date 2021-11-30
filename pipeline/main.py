@@ -22,13 +22,13 @@ import data_preparation
 #DATA JOINING
 
 joined_data = data_preparation.prep_data('train')
-joined_data_competition = data_preparation.prep_data('competition')
+#joined_data_competition = data_preparation.prep_data('competition')
 
 #DATA CLEANING
 
 joined_data["status"].replace({-1: 1, 1: -1}, inplace=True)
 
-joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
+#joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
 
 #DATA SPLITTING
 
@@ -96,7 +96,7 @@ prediction_proba = classifier.predict_proba(testing_inputs)
 
 #OBTAINING SUBMISSION
 
-submission_file.create(joined_data_competition,classifier)
+#submission_file.create(joined_data_competition,classifier)
 
 
 
