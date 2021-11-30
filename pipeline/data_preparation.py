@@ -52,15 +52,19 @@ def prep_data(arg):
     reg ={"south Moravia": 1, "north Moravia": 2, "Prague": 3, "central Bohemia": 4, "east Bohemia": 5,"west Bohemia": 6, "south Bohemia": 7, "north Bohemia": 8}
     loan_account_district.region = [reg[i] for i in loan_account_district.region]
     
-    return loan_account_district
+    #prepare to join card
+    card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
+    card_train.rename(columns={'type': 'card_type'}, inplace=True)
+    disp.rename(columns={'type': 'disp_type'}, inplace=True)
+    disp_card = pd.merge(disp, card_train, on="disp_id")
+    disp_card.drop(['disp_id', 'client_id','disp_type'], axis = 1, inplace=True)
+    cardtypes = {'junior':1, 'classic':2, 'gold':3}
+    disp_card.card_type = [cardtypes[i] for i in disp_card.card_type]
+    print(len(loan_account_district))
+    loan_account_district_card = pd.merge(loan_account_district, disp_card, on="account_id", how = "left")
+    loan_account_district_card['card_type'].fillna(int(0), inplace = True)
+    return loan_account_district_card
 
 
-#print(prep_data('train').columns)
-#join disp and card_train
-#card_train.drop(['card_id', 'issued'], axis = 1, inplace=True)
-#ard_train.rename(columns={'type': 'card_type'}, inplace=True)
-#disp.rename(columns={'type': 'disp_type'}, inplace=True)
-#disp_card = pd.merge(disp, card_train, on="disp_id")
-#disp_card.drop('disp_id', axis = 1, inplace=True)
-#print(disp_card.columns)
-#disp_card.groupby('account_id')
+print(prep_data('train').head())
+
