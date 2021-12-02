@@ -22,13 +22,11 @@ import data_preparation
 #DATA JOINING
 
 joined_data = data_preparation.prep_data('train')
-#joined_data_competition = data_preparation.prep_data('competition')
+joined_data_competition = data_preparation.prep_data('competition')
 
 #DATA CLEANING
 
-joined_data["status"].replace({-1: 1, 1: -1}, inplace=True)
 
-#joined_data_competition["status"].replace({-1: 1, 1: -1}, inplace=True)
 
 #DATA SPLITTING
 
@@ -39,27 +37,17 @@ test = split_data[1]
 
 #DATA SAMPLING
 
-train = data_sampling.sampling(train)
+#train = data_sampling.sampling(train)
 
 #MODEL BUILDING
 
 # Preparing data for classifier
-training_inputs = train[['loan_date', 'amount', 'duration', 'payments',
-       'frequency', 'account_date', 'region', 'inhabitants',
-       'inhabitants < 499', 'inhabitants 500-1999', 'inhabitants 2000-9999',
-       'inhabitants >10000', 'no. of cities ', 'ratio of urban inhabitants ',
-       'average salary ', 'unemploymant 96',
-       'enterpreneurs', 'crimes 96']].values
+training_inputs = train.drop(['status','loan_id'], axis = 1)
 
 training_labels = train['status'].values
 
 
-testing_inputs = test[['loan_date', 'amount', 'duration', 'payments',
-       'frequency', 'account_date', 'region', 'inhabitants',
-       'inhabitants < 499', 'inhabitants 500-1999', 'inhabitants 2000-9999',
-       'inhabitants >10000', 'no. of cities ', 'ratio of urban inhabitants ',
-       'average salary ', 'unemploymant 96',
-       'enterpreneurs', 'crimes 96']].values
+testing_inputs = test.drop(['status','loan_id'], axis = 1)
 
 testing_labels = test['status'].values
 
@@ -69,9 +57,9 @@ testing_labels = test['status'].values
 
 # Create the classifier
 #classifier = DecisionTreeClassifier()
-#classifier = RandomForestClassifier()
+classifier = RandomForestClassifier(max_depth=5, n_estimators=41, random_state=5)
 #classifier = GaussianNB()
-classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
+#classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
 #classifier = SVC(probability=True)
 #classifier = Perceptron()
 
@@ -92,7 +80,7 @@ prediction_proba = classifier.predict_proba(testing_inputs)
 
 #print("Accuracy score: {}".format(score))
 
-#print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
+print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
 
 #OBTAINING SUBMISSION
 
