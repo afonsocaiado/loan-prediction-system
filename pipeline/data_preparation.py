@@ -45,6 +45,7 @@ def prep_data(arg):
     replace_dict = {'unemploymant 95': {'?': pd.to_numeric(district['unemploymant 95'], errors="coerce").mean()},
                     'crimes 95': {'?': pd.to_numeric(district['crimes 95'], errors="coerce").mean()}}
     district.replace(replace_dict, inplace = True)
+    district[['crimes 95', 'unemploymant 95']] = district[['crimes 95', 'unemploymant 95']].apply(pd.to_numeric)
     
     #join loan_account with district
     loan_account_district = pd.merge(loan_account, district, left_on="district_id", right_on="code ")
@@ -77,8 +78,10 @@ def prep_data(arg):
     disp_card.card_type = [cardtypes[i] for i in disp_card.card_type]
     loan_account_district_trans_card = pd.merge(loan_account_district_trans, disp_card, on="account_id", how = "left")
     loan_account_district_trans_card['card_type'].fillna(int(0), inplace = True)
+    
+    #drop account id
+    loan_account_district_trans_card.drop('account_id', axis=1, inplace=True)
 
     return loan_account_district_trans_card
 
-print(prep_data('train').head())
 
