@@ -84,7 +84,7 @@ print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1]
 
 #OBTAINING SUBMISSION
 
-#submission_file.create(joined_data_competition,classifier)
+submission_file.create(joined_data_competition,classifier)
 
 
 

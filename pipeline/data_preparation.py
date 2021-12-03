@@ -79,9 +79,40 @@ def prep_data(arg):
     loan_account_district_trans_card = pd.merge(loan_account_district_trans, disp_card, on="account_id", how = "left")
     loan_account_district_trans_card['card_type'].fillna(int(0), inplace = True)
     
+    
+    # get male or female and birth date
+    disp = pd.read_csv('../data/disp.csv',na_values = ['NA'],delimiter=";")
+    disp.rename(columns={'type': 'disp_type'}, inplace=True)
+    disp_client = pd.merge(disp, loan, on="account_id")
+    disp_client.drop(['disp_id','account_id','loan_date','amount','duration','payments','status'], axis = 1, inplace=True)
+    disp_client = pd.merge(disp_client, client, on="client_id")
+    disp_client = disp_client.loc[disp_client['disp_type'] == "OWNER"]
+    disp_client['is_male'] = [isMale(n) for n in disp_client.birth_number]
+    disp_client.birth_number = [getDate(n) for n in disp_client.birth_number]
+    disp_client.drop(['client_id','disp_type','district_id'], axis = 1, inplace=True)
+    #print(disp_client)
+    
+    # join birth date
+    loan_account_district_trans_card = pd.merge(loan_account_district_trans_card,disp_client,on="loan_id")
     #drop account id
     loan_account_district_trans_card.drop('account_id', axis=1, inplace=True)
 
     return loan_account_district_trans_card
 
+def isMale(n):
+	n = str(n)
+	m = int(n[2:4])
+	if m > 12:
+		return 0
+	else:
+		return 1
+
+def getDate(n):
+	n = str(n)
+	y = n[0:2]
+	m = int(n[2:4])
+	d = n[4:6]
+	if m>12:
+		m -= 50
+	return str(y)+"{:02d}".format(m)+str(d)
 
