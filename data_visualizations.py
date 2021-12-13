@@ -35,14 +35,20 @@ sns.distplot(dev["date"])
 plt.show()
 sns.distplot(dev["amount"])
 plt.show()
-dev["amount"].plot.box(figsize=(16,5))
-plt.show()
 sns.distplot(dev["duration"])
 plt.show()
 sns.distplot(dev["payments"])
 plt.show()
 
-
+#outlier detection
+plt.show()
+dev["date"].plot.box(figsize=(16,5))
+plt.show()
+dev["amount"].plot.box(figsize=(16,5))
+plt.show()
+dev["duration"].plot.box(figsize=(16,5))
+plt.show()
+dev["payments"].plot.box(figsize=(16,5))
 
 #print percentage of valid and unvalid loans
 print("percentage of valid(+1) and unvalid(-1) loans and plot:\n",dev['status'].value_counts(normalize=True))
