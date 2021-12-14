@@ -35,10 +35,6 @@ split_data = data_splitting.split(joined_data)
 train = split_data[0]
 test = split_data[1]
 
-#DATA SAMPLING
-
-#train = data_sampling.sampling(train)
-
 #MODEL BUILDING
 
 # Preparing data for classifier
@@ -51,9 +47,10 @@ testing_inputs = test.drop(['status','loan_id'], axis = 1)
 
 testing_labels = test['status'].values
 
-#MODEL APPLYING AND OBTAINING PREDICTION
+#DATA SAMPLING
+#training_inputs, training_labels = data_sampling.SMOTE_sample(training_inputs, training_labels)
 
-#Decision Tree
+#MODEL APPLYING AND OBTAINING PREDICTION
 
 # Create the classifier
 #classifier = DecisionTreeClassifier()
