@@ -6,11 +6,11 @@ import matplotlib.pyplot as plt
 #read in all (training) datafiles
 #these can be joined later on to use all data for the models
 #account = pd.read_csv('data\account.csv',delimiter=";")
-card_train = pd.read_csv('data\card_train.csv',delimiter=";")
-client = pd.read_csv('data\client.csv',delimiter=";")
-disp = pd.read_csv('data\disp.csv',delimiter=";")
-district = pd.read_csv('data\district.csv',delimiter=";")
-loan_train = pd.read_csv('data\loan_train.csv',delimiter=";")
+card_train = pd.read_csv('data/card_train.csv',delimiter=";")
+client = pd.read_csv('data/client.csv',delimiter=";")
+disp = pd.read_csv('data/disp.csv',delimiter=";")
+district = pd.read_csv('data/district.csv',delimiter=";")
+loan_train = pd.read_csv('data/loan_train.csv',delimiter=";")
 #trans_train = pd.read_csv('data\trans_train.csv',delimiter=";")
 
 #lets focus at the loan_train dataset for now
@@ -41,17 +41,17 @@ sns.distplot(dev["payments"])
 plt.show()
 
 #outlier detection
+dev["date"].plot.box(title="Date Boxplot")
 plt.show()
-dev["date"].plot.box(figsize=(16,5))
+dev["amount"].plot.box(title="Amount Boxplot")
 plt.show()
-dev["amount"].plot.box(figsize=(16,5))
+dev["duration"].plot.box(title="Duration Boxplot")
 plt.show()
-dev["duration"].plot.box(figsize=(16,5))
+dev["payments"].plot.box(title="Payments Boxplot")
 plt.show()
-dev["payments"].plot.box(figsize=(16,5))
 
 #print percentage of valid and unvalid loans
-print("percentage of valid(+1) and unvalid(-1) loans and plot:\n",dev['status'].value_counts(normalize=True))
+print("percentage of valid(+1) and unvalid(-1) loans and plot:\n", dev['status'].value_counts(normalize=True))
 
 #barplot of number of valid and unvalid loans
 dev['status'].value_counts().plot.bar(title = 'Status of loans')

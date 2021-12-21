@@ -1,11 +1,5 @@
-import numpy as np
-import pandas as pd
-from matplotlib import pyplot as plt
-import seaborn as sns
-
 from sklearn import model_selection
 from sklearn import metrics
-from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
 
 
@@ -17,6 +11,7 @@ competition = data_preparation.prep_data('competition')
 
 X = data.drop(['status','loan_id'], axis = 1)
 y = data.status
+
 #splitting
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size = 0.33, random_state = 5, stratify=y)
 
@@ -29,9 +24,8 @@ X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_s
 model = RandomForestClassifier(max_depth=5, n_estimators=41, random_state=4)
 #model = LogisticRegression(multi_class="multinomial", max_iter=1000, class_weight="balanced")
 
-
 model.fit(X_train, y_train)
 prediction_proba = model.predict_proba(X_test)
 print("AUC score: {}".format(metrics.roc_auc_score(y_test, prediction_proba[:,1])))
 
-submission_file.create(competition,model)
+submission_file.create(competition, model)

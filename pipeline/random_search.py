@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pd
 
 from sklearn import model_selection
 from sklearn.ensemble import RandomForestClassifier
@@ -19,6 +18,7 @@ data = data_preparation.prep_data('train')
 
 X = data.drop('status', axis = 1)
 y = data.status
+
 #splitting
 X_train, X_test, y_train, y_test = model_selection.train_test_split(X, y, test_size = 0.33, random_state = 5, stratify=y)
 
