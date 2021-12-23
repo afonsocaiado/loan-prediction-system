@@ -68,6 +68,11 @@ plt.show()
 dev.plot.line(x="date", y="amount", title="Amount by Date")
 plt.show()
 
+# line plot from the 1994 year
+dev.plot.line(x="date", y="amount", title="Amount in 1994")
+plt.xlim(940000,941300)
+plt.show()
+
 # barplot  of average total loan by status
 print("Lets see the average loanamount and average monthly loanamount by status:")
 dev.groupby('status')['amount'].mean().plot.bar(title='Average loan by status')

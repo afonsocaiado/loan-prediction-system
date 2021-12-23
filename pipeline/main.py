@@ -18,22 +18,17 @@ import data_preparation
 
 # DATA READING
 
-# DATA JOINING
-
+# DATA PREPARATION
 joined_data = data_preparation.prep_data('train')
 joined_data_competition = data_preparation.prep_data('competition')
 
-# DATA CLEANING
-
 # DATA SPLITTING
-
 split_data = data_splitting.split(joined_data)
 
 train = split_data[0]
 test = split_data[1]
 
 # MODEL BUILDING
-
 # Preparing data for classifier
 training_inputs = train.drop(['status','loan_id'], axis = 1)
 
@@ -48,7 +43,6 @@ testing_labels = test['status'].values
 # training_inputs, training_labels = data_sampling.SMOTE_sample(training_inputs, training_labels)
 
 # MODEL APPLYING AND OBTAINING PREDICTION
-
 # Create the classifier
 # classifier = DecisionTreeClassifier()
 classifier = RandomForestClassifier(max_depth=5, n_estimators=41, random_state=5)
