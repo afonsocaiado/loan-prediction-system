@@ -1,6 +1,13 @@
 # AC-G73
 
-# TO DO 
+# Installation and Use
 
-- Saldo medio a partir das transaçoes
-- Construir mais algumas variaveis deste genero
+For data understanding and visualization:
+````
+$ python3 data_visualizations.py
+````
+
+To execute our program:
+````
+$ cd pipeline
+$ python3 main.py

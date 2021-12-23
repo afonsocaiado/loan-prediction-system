@@ -16,26 +16,23 @@ import data_sampling
 import submission_file
 import data_preparation
 
-#DATA READING
+# DATA READING
 
-
-#DATA JOINING
+# DATA JOINING
 
 joined_data = data_preparation.prep_data('train')
 joined_data_competition = data_preparation.prep_data('competition')
 
-#DATA CLEANING
+# DATA CLEANING
 
-
-
-#DATA SPLITTING
+# DATA SPLITTING
 
 split_data = data_splitting.split(joined_data)
 
 train = split_data[0]
 test = split_data[1]
 
-#MODEL BUILDING
+# MODEL BUILDING
 
 # Preparing data for classifier
 training_inputs = train.drop(['status','loan_id'], axis = 1)
@@ -47,18 +44,18 @@ testing_inputs = test.drop(['status','loan_id'], axis = 1)
 
 testing_labels = test['status'].values
 
-#DATA SAMPLING
-#training_inputs, training_labels = data_sampling.SMOTE_sample(training_inputs, training_labels)
+# DATA SAMPLING
+# training_inputs, training_labels = data_sampling.SMOTE_sample(training_inputs, training_labels)
 
-#MODEL APPLYING AND OBTAINING PREDICTION
+# MODEL APPLYING AND OBTAINING PREDICTION
 
 # Create the classifier
-#classifier = DecisionTreeClassifier()
+# classifier = DecisionTreeClassifier()
 classifier = RandomForestClassifier(max_depth=5, n_estimators=41, random_state=5)
-#classifier = GaussianNB()
-#classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
-#classifier = SVC(probability=True)
-#classifier = Perceptron()
+# classifier = GaussianNB()
+# classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
+# classifier = SVC(probability=True)
+# classifier = Perceptron()
 
 # Train the classifier on the training set
 classifier.fit(training_inputs, training_labels)
@@ -71,15 +68,15 @@ predicted = classifier.predict(testing_inputs)
 prediction_proba = classifier.predict_proba(testing_inputs)
 
 #(predicted)
-#print(testing_labels)
+# print(testing_labels)
 
-#print(prediction_proba)
+# print(prediction_proba)
 
-#print("Accuracy score: {}".format(score))
+# print("Accuracy score: {}".format(score))
 
 print("AUC score: {}".format(roc_auc_score(testing_labels, prediction_proba[:,1])))
 
-#OBTAINING SUBMISSION
+# OBTAINING SUBMISSION
 
 submission_file.create(joined_data_competition,classifier)
 

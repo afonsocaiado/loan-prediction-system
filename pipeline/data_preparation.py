@@ -51,6 +51,7 @@ def prep_data(arg):
                              'no. of enterpreneurs per 1000 inhabitants ': 'enterpreneurs',
                              "no. of commited crimes '95 ": 'crimes 95', "no. of commited crimes '96 ": 'crimes 96'},
                     inplace=True)
+                    
     # replace question marks by mean value of column
     replace_dict = {'unemploymant 95': {'?': pd.to_numeric(district['unemploymant 95'], errors="coerce").mean()},
                     'crimes 95': {'?': pd.to_numeric(district['crimes 95'], errors="coerce").mean()}}
