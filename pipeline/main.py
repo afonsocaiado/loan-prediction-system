@@ -47,7 +47,7 @@ testing_labels = test['status'].values
 # classifier = DecisionTreeClassifier()
 classifier = RandomForestClassifier(max_depth=5, n_estimators=41, random_state=5)
 # classifier = GaussianNB()
-# classifier = LogisticRegression(multi_class="multinomial", max_iter=1000)
+# classifier = LogisticRegression(multi_class="multinomial", max_iter=1000, class_weight="balanced")
 # classifier = SVC(probability=True)
 # classifier = Perceptron()
 
