@@ -1,25 +1,78 @@
-# Loan Predictive Task - Machine Learning Group Project
+# Loan Prediction System
 
-Group members:
-1. Afonso Caiado (up201806789@up.pt)
-2. Elias Lambrecht (up202102122@up.pt)
-3. José Miguel Maçães (up202106622@up.pt)
-4. Luís Miguel Afonso Pinto (up202106206@up.pt)
+A machine learning project focused on predicting loan outcomes for banking services.
 
-# Task description
+## Overview
 
-The bank wants to improve their services. For instance, the bank managers have only vague idea, who is a good client (whom to offer some additional services) and who is a bad client (whom to watch carefully to minimize the bank loses). Fortunately, the bank stores data about their clients, the accounts (transactions within several months), the loans already granted, the credit cards issued. The bank managers hope to improve their understanding of customers and seek specific actions to improve services. A mere application of a discovery tool will not be convincing for them.  
+This project addresses a key challenge in banking: identifying good clients for additional services versus high-risk clients requiring careful monitoring. Using machine learning techniques on historical banking data, we developed a predictive system to determine whether a loan will end successfully or not.
 
-To test a data mining approach to help the bank managers, it was decided to address two problems, a descriptive and a predictive one. While the descriptive problem was left open, the predictive problem is the prediction of whether a loan will end successfuly.
+## Features
 
-# Installation and Use
+- Data preparation and preprocessing pipeline
+- Exploratory data analysis with visualizations
+- Implementation of various machine learning models:
+  - Random Forest Classifier
+  - Decision Tree Classifier
+  - Gaussian Naive Bayes
+  - Logistic Regression
+  - Support Vector Machines
+- Model evaluation using AUC and accuracy metrics
+- Dataset balancing techniques
 
-For data understanding and visualization:
-````
-$ python3 data_visualizations.py
-````
+## Project Structure
 
-To execute our program:
-````
-$ cd pipeline
-$ python3 main.py
+- `data/`: Contains all datasets (client information, account details, transactions, etc.)
+- `pipeline/`: Core processing components and machine learning implementation
+  - `main.py`: Main execution script
+  - `data_preparation.py`: Data preprocessing functions
+  - `data_splitting.py`: Training/testing data split utilities
+  - Various model implementations
+- `docs/`: Documentation and reports
+- `data_visualizations.py`: Scripts for exploratory data analysis
+
+## Installation
+
+1. Clone the repository:
+```bash
+git clone https://github.com/yourusername/loan-prediction-system.git
+cd loan-prediction-system
+```
+
+2. Install required dependencies:
+```bash
+pip install pandas numpy scikit-learn matplotlib seaborn
+```
+
+## Usage
+
+For data exploration and visualization:
+```bash
+python data_visualizations.py
+```
+
+To run the prediction model:
+```bash
+cd pipeline
+python main.py
+```
+
+## Results
+
+The model achieves reliable prediction of loan outcomes, allowing banks to:
+- Identify high-risk applicants before loan approval
+- Offer tailored services to low-risk clients
+- Optimize loan approval processes
+- Reduce financial losses from defaulted loans
+
+Detailed results and analysis can be found in the documentation under `docs/`.
+
+## Contributors
+
+- Afonso Caiado
+- Elias Lambrecht
+- José Miguel Maçães
+- Luís Miguel Afonso Pinto
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
