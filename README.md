@@ -1,8 +1,8 @@
-# Loan Prediction System
+# 🏦 Loan Prediction System
 
 A machine learning project focused on predicting loan outcomes for banking services.
 
-## Technologies
+## 🔧 Technologies
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white)
@@ -11,11 +11,11 @@ A machine learning project focused on predicting loan outcomes for banking servi
 ![Matplotlib](https://img.shields.io/badge/Matplotlib-3776AB?style=for-the-badge&logo=python&logoColor=white)
 ![Seaborn](https://img.shields.io/badge/Seaborn-3776AB?style=for-the-badge&logo=python&logoColor=white)
 
-## Overview
+## 📋 Overview
 
 This project addresses a key challenge in banking: identifying good clients for additional services versus high-risk clients requiring careful monitoring. Using machine learning techniques on historical banking data, we developed a predictive system to determine whether a loan will end successfully or not.
 
-## Features
+## ✨ Features
 
 - Data preparation and preprocessing pipeline
 - Exploratory data analysis with visualizations
@@ -28,7 +28,7 @@ This project addresses a key challenge in banking: identifying good clients for 
 - Model evaluation using AUC and accuracy metrics
 - Dataset balancing techniques
 
-## Project Structure
+## 🗂️ Project Structure
 
 - `data/`: Contains all datasets (client information, account details, transactions, etc.)
 - `pipeline/`: Core processing components and machine learning implementation
@@ -39,7 +39,7 @@ This project addresses a key challenge in banking: identifying good clients for 
 - `docs/`: Documentation and reports
 - `data_visualizations.py`: Scripts for exploratory data analysis
 
-## Installation
+## 🚀 Installation
 
 1. Clone the repository:
 ```bash
@@ -52,7 +52,7 @@ cd loan-prediction-system
 pip install pandas numpy scikit-learn matplotlib seaborn
 ```
 
-## Usage
+## 📚 Usage
 
 For data exploration and visualization:
 ```bash
@@ -65,7 +65,7 @@ cd pipeline
 python main.py
 ```
 
-## Results
+## 📊 Results
 
 The model achieves reliable prediction of loan outcomes, allowing banks to:
 - Identify high-risk applicants before loan approval
@@ -75,13 +75,13 @@ The model achieves reliable prediction of loan outcomes, allowing banks to:
 
 Detailed results and analysis can be found in the documentation under `docs/`.
 
-## Contributors
+## 👥 Contributors
 
 - Afonso Caiado
 - Elias Lambrecht
 - José Miguel Maçães
 - Luís Miguel Afonso Pinto
 
-## License
+## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
